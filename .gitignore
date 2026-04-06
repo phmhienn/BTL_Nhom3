@@ -1,0 +1,35 @@
+# Gradle
+.gradle/
+build/
+
+# Local config (máy riêng)
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated files
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Keystore (bảo mật)
+*.jks
+*.keystore
+
+# Kotlin/Java build
+out/
+
+# Navigation temp
+.navigation/
+
+# Android profiling
+*.hprof
