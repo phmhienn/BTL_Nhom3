@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BTL_Nhom3">
+        <activity android:name=".feature_cart.ui.CartActivity"/>
+        <activity android:name=".feature_cart.ui.CheckoutActivity"/>
+        <activity android:name=".feature_menu.ui.SearchActivity"/>
+        <activity android:name=".feature_menu.ui.FoodDetailActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
