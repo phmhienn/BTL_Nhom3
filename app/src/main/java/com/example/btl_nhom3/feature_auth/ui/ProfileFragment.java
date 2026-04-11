@@ -1,6 +1,7 @@
 package com.example.btl_nhom3.feature_auth.ui;
 
 import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,11 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.btl_nhom3.MainActivity;
 import com.example.btl_nhom3.R;
 
 public class ProfileFragment extends Fragment {
+
+    private static final String PREF_USER = "USER";
 
     Button btnLogout;
 
@@ -25,14 +27,14 @@ public class ProfileFragment extends Fragment {
         btnLogout.setOnClickListener(v -> {
 
             // clear user (nếu có login)
-            requireActivity().getSharedPreferences("USER", 0)
+            requireActivity().getSharedPreferences(PREF_USER, Context.MODE_PRIVATE)
                     .edit()
                     .clear()
                     .apply();
 
             // quay về màn chính hoặc login
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
 

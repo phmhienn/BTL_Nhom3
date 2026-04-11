@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.btl_nhom3.feature_cart.ui.CartActivity;
 import com.example.btl_nhom3.feature_menu.ui.HomeFragment;
-import com.example.btl_nhom3.feature_auth.ui.ProfileFragment;
 import com.example.btl_nhom3.feature_menu.ui.MenuFragment;
+import com.example.btl_nhom3.feature_profile.ui.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
