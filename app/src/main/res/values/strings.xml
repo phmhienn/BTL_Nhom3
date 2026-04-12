@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BTL_Nhom3</string>
+    <string name="title_activity_item_profile_option">item_profile_option</string>
 </resources>

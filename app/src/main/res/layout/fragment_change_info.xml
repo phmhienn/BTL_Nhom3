@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thông tin cá nhân"
+            android:text="Cập nhật thông tin"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -20,32 +21,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Tài khoản"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:background="@android:color/transparent"
-            android:padding="10dp"
-            android:text="user_demo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="Họ tên"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtFullName"
+        <EditText
+            android:id="@+id/edtFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:padding="10dp"
-            android:text="Nguyen Van A" />
+            android:hint="Họ tên"
+            android:inputType="textPersonName"
+            android:maxLines="1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,13 +40,14 @@
             android:text="Số điện thoại"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtPhone"
+        <EditText
+            android:id="@+id/edtPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:padding="10dp"
-            android:text="0911111111" />
+            android:hint="Số điện thoại"
+            android:inputType="phone"
+            android:maxLines="1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,34 +56,29 @@
             android:text="Địa chỉ"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtAddress"
+        <EditText
+            android:id="@+id/edtAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:padding="10dp"
-            android:text="Viet Nam" />
+            android:hint="Địa chỉ"
+            android:inputType="textPostalAddress"
+            android:maxLines="2" />
 
         <Button
-            android:id="@+id/btnEditProfile"
+            android:id="@+id/btnSubmitChangeInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Cập nhật thông tin" />
+            android:layout_marginTop="18dp"
+            android:text="Lưu thông tin" />
 
         <Button
-            android:id="@+id/btnChangePassword"
+            android:id="@+id/btnCancelChangeInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Đổi mật khẩu" />
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Đăng xuất" />
+            android:layout_marginTop="10dp"
+            android:text="Quay lại" />
 
     </LinearLayout>
 </ScrollView>
+

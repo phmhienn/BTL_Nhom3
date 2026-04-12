@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.btl_nhom3.MainActivity;
 import com.example.btl_nhom3.R;
+import com.example.btl_nhom3.core.database.Database;
 import com.example.btl_nhom3.feature_auth.model.User;
 import com.example.btl_nhom3.feature_auth.viewmodel.AuthViewModel;
 
@@ -52,7 +53,8 @@ public class LoginActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-
+		Database db = new Database(this);
+		db.getWritableDatabase();
 		edtUsername = findViewById(R.id.edtUsername);
 		edtPassword = findViewById(R.id.edtPassword);
 		txtError = findViewById(R.id.txtError);

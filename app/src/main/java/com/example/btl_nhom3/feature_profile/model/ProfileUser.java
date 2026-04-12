@@ -6,15 +6,13 @@ public class ProfileUser {
     private final String fullName;
     private final String phone;
     private final String address;
-    private final String role;
 
-    public ProfileUser(int id, String username, String fullName, String phone, String address, String role) {
+    public ProfileUser(int id, String username, String fullName, String phone, String address) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
         this.phone = phone;
         this.address = address;
-        this.role = role;
     }
 
     public int getId() {
@@ -35,10 +33,6 @@ public class ProfileUser {
 
     public String getAddress() {
         return address;
-    }
-
-    public String getRole() {
-        return role;
     }
 }
 

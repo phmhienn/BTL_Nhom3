@@ -1,11 +1,13 @@
 package com.example.btl_nhom3;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.btl_nhom3.feature_auth.ui.LoginActivity;
 import com.example.btl_nhom3.feature_cart.ui.CartActivity;
 import com.example.btl_nhom3.feature_menu.ui.HomeFragment;
 import com.example.btl_nhom3.feature_menu.ui.MenuFragment;
@@ -13,6 +15,9 @@ import com.example.btl_nhom3.feature_profile.ui.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+  private static final String PREF_USER = "USER";
+  private static final String KEY_USER_ID = "user_id";
 
     BottomNavigationView bottomNav;
 
@@ -34,7 +39,12 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.nav_menu) {
                 fragment = new MenuFragment();
             } else if (item.getItemId() == R.id.nav_profile) {
-                fragment = new ProfileFragment();
+				if (isLoggedIn()) {
+					fragment = new ProfileFragment();
+				} else {
+					startActivity(new Intent(this, LoginActivity.class));
+					return true;
+				}
             } else if (item.getItemId() == R.id.nav_cart) {
                 startActivity(new Intent(this, CartActivity.class));
                 return true;
@@ -55,4 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+	private boolean isLoggedIn() {
+		int userId = getSharedPreferences(PREF_USER, Context.MODE_PRIVATE)
+				.getInt(KEY_USER_ID, -1);
+		return userId > 0;
+	}
 }
