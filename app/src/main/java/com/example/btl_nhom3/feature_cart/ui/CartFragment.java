@@ -1,11 +1,15 @@
 package com.example.btl_nhom3.feature_cart.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,32 +19,31 @@ import com.example.btl_nhom3.feature_cart.adapter.CartAdapter;
 import com.example.btl_nhom3.feature_cart.model.CartItem;
 import com.example.btl_nhom3.feature_cart.viewmodel.CartViewModel;
 
-import java.util.List;
+public class CartFragment extends Fragment {
 
-public class CartActivity extends AppCompatActivity {
+    private RecyclerView rvCart;
+    private TextView txtTotal;
+    private Button btnCheckout;
 
-    public static final String EXTRA_TOTAL = "extra_total";
-    public static final String EXTRA_ITEM_COUNT = "extra_item_count";
+    private CartAdapter adapter;
+    private CartViewModel viewModel;
 
-    RecyclerView rvCart;
-    TextView txtTotal;
-    Button btnCheckout;
-
-    CartAdapter adapter;
-    CartViewModel viewModel;
-    List<CartItem> currentItems;
-    int currentTotal;
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_cart, container, false);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        rvCart = findViewById(R.id.rvCart);
-        txtTotal = findViewById(R.id.txtTotal);
-        btnCheckout = findViewById(R.id.btnCheckout);
+        rvCart = view.findViewById(R.id.rvCart);
+        txtTotal = view.findViewById(R.id.txtTotal);
+        btnCheckout = view.findViewById(R.id.btnCheckout);
 
-        rvCart.setLayoutManager(new LinearLayoutManager(this));
+        rvCart.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         adapter = new CartAdapter(null);
         rvCart.setAdapter(adapter);
@@ -66,26 +69,21 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+        btnCheckout.setText("Đặt hàng");
+        // Keep button ready in UI only; order flow will be wired later.
         btnCheckout.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CheckoutActivity.class);
-            intent.putExtra(EXTRA_TOTAL, currentTotal);
-            intent.putExtra(EXTRA_ITEM_COUNT, currentItems == null ? 0 : currentItems.size());
-            startActivity(intent);
         });
     }
 
     private void observeViewModel() {
-        viewModel.getCartItems().observe(this, items -> {
-            currentItems = items;
-            adapter.submitList(items);
-        });
+        viewModel.getCartItems().observe(getViewLifecycleOwner(), items -> adapter.submitList(items));
 
-        viewModel.getTotal().observe(this, total -> {
-            currentTotal = total == null ? 0 : total;
+        viewModel.getTotal().observe(getViewLifecycleOwner(), total -> {
+            int currentTotal = total == null ? 0 : total;
             txtTotal.setText("Tổng: " + currentTotal + "đ");
         });
 
-        viewModel.getCanCheckout().observe(this, canCheckout -> {
+        viewModel.getCanCheckout().observe(getViewLifecycleOwner(), canCheckout -> {
             boolean enabled = canCheckout != null && canCheckout;
             btnCheckout.setEnabled(enabled);
             if (!enabled) {
@@ -94,3 +92,4 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 }
+

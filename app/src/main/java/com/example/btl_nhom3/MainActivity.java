@@ -1,12 +1,11 @@
 package com.example.btl_nhom3;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.btl_nhom3.feature_cart.ui.CartActivity;
+import com.example.btl_nhom3.feature_cart.ui.CartFragment;
 import com.example.btl_nhom3.feature_menu.ui.HomeFragment;
 import com.example.btl_nhom3.feature_menu.ui.MenuFragment;
 import com.example.btl_nhom3.feature_profile.ui.ProfileFragment;
@@ -36,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.nav_profile) {
                 fragment = new ProfileFragment();
             } else if (item.getItemId() == R.id.nav_cart) {
-                startActivity(new Intent(this, CartActivity.class));
-                return true;
+                fragment = new CartFragment();
             }
 
 

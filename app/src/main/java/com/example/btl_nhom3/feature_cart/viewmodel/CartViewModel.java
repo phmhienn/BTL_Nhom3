@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CartViewModel extends ViewModel {
 
-	private final CartRepository repository = new CartRepository();
+	private final CartRepository repository = CartRepository.getInstance();
 
 	private final MutableLiveData<List<CartItem>> cartItems = new MutableLiveData<>();
 	private final MutableLiveData<Integer> total = new MutableLiveData<>(0);

@@ -1,6 +1,9 @@
 package com.example.btl_nhom3.feature_cart.model;
 
 public class CartItem {
+    private static final int MIN_QUANTITY = 0;
+    private static final int MAX_QUANTITY = 100;
+
     private int id;
     private String name;
     private int price;
@@ -24,7 +27,7 @@ public class CartItem {
     public int getQuantity() { return quantity; }
 
     public void setQuantity(int quantity) {
-        this.quantity = Math.max(0, quantity);
+        this.quantity = Math.max(MIN_QUANTITY, Math.min(MAX_QUANTITY, quantity));
     }
 
     public int getSubtotal() {

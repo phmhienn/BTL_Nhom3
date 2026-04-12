@@ -7,12 +7,32 @@ import java.util.List;
 
 public class CartRepository {
 
+    private static final int MIN_QUANTITY = 0;
+    private static final int MAX_QUANTITY = 100;
+    private static CartRepository instance;
+
     private final List<CartItem> cartItems = new ArrayList<>();
 
-    public CartRepository() {
-        cartItems.add(new CartItem(1, "Burger bò", 50000, 2));
-        cartItems.add(new CartItem(2, "Pizza hải sản", 120000, 1));
-        cartItems.add(new CartItem(3, "Trà sữa", 30000, 3));
+    private CartRepository() {
+    }
+
+    public static synchronized CartRepository getInstance() {
+        if (instance == null) {
+            instance = new CartRepository();
+        }
+        return instance;
+    }
+
+    public void addItem(int itemId, String name, int price) {
+        for (CartItem item : cartItems) {
+            if (item.getId() == itemId) {
+                int nextQuantity = Math.min(MAX_QUANTITY, item.getQuantity() + 1);
+                item.setQuantity(nextQuantity);
+                return;
+            }
+        }
+
+        cartItems.add(new CartItem(itemId, name, price, 1));
     }
 
     public List<CartItem> getCart() {
@@ -23,10 +43,11 @@ public class CartRepository {
         for (int i = 0; i < cartItems.size(); i++) {
             CartItem item = cartItems.get(i);
             if (item.getId() == itemId) {
-                if (quantity <= 0) {
+                int safeQuantity = Math.max(MIN_QUANTITY, Math.min(MAX_QUANTITY, quantity));
+                if (safeQuantity <= 0) {
                     cartItems.remove(i);
                 } else {
-                    item.setQuantity(quantity);
+                    item.setQuantity(safeQuantity);
                 }
                 return;
             }

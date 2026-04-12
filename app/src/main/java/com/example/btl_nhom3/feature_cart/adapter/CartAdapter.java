@@ -3,6 +3,7 @@ package com.example.btl_nhom3.feature_cart.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,21 +55,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.txtPrice.setText(item.getPrice() + "đ");
         holder.txtQty.setText("SL: " + item.getQuantity());
 
-        holder.itemView.setOnClickListener(v -> {
+        holder.btnIncrease.setEnabled(item.getQuantity() < 100);
+
+        holder.btnIncrease.setOnClickListener(v -> {
             if (actionListener != null) {
                 actionListener.onIncrease(item);
             }
         });
 
-        holder.itemView.setOnLongClickListener(v -> {
+        holder.btnDecrease.setOnClickListener(v -> {
             if (actionListener != null) {
-                if (item.getQuantity() > 1) {
-                    actionListener.onDecrease(item);
-                } else {
-                    actionListener.onRemove(item);
-                }
+                actionListener.onDecrease(item);
             }
-            return true;
         });
     }
 
@@ -80,6 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtName, txtPrice, txtQty;
+        Button btnIncrease, btnDecrease;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,6 +86,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             txtName = itemView.findViewById(R.id.txtName);
             txtPrice = itemView.findViewById(R.id.txtPrice);
             txtQty = itemView.findViewById(R.id.txtQty);
+            btnIncrease = itemView.findViewById(R.id.btnIncrease);
+            btnDecrease = itemView.findViewById(R.id.btnDecrease);
         }
     }
 }
