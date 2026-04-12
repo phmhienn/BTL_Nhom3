@@ -13,6 +13,8 @@ import com.example.btl_nhom3.R;
 import com.example.btl_nhom3.feature_cart.adapter.CartAdapter;
 import com.example.btl_nhom3.feature_cart.model.CartItem;
 import com.example.btl_nhom3.feature_cart.repository.CartRepository;
+import com.example.btl_nhom3.feature_order.ui.OrderActivity;
+
 
 import java.util.List;
 
@@ -47,14 +49,17 @@ public class CartActivity extends AppCompatActivity {
         // tính tổng tiền
         updateTotal();
 
-        // nút thanh toán
+        // Nút thanh toán chuyển sang OrderActivity
         btnCheckout.setOnClickListener(v -> {
-            startActivity(new Intent(this, CheckoutActivity.class));
+            Intent intent = new Intent(this, OrderActivity.class);
+            intent.putExtra("TOTAL_PRICE", total);
+            startActivity(intent);
         });
     }
+    private int total = 0;
 
     private void updateTotal() {
-        int total = 0;
+        total = 0;
 
         for (CartItem item : cartList) {
             total += item.getPrice() * item.getQuantity();

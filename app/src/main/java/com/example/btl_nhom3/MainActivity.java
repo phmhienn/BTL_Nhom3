@@ -10,6 +10,7 @@ import com.example.btl_nhom3.feature_cart.ui.CartActivity;
 import com.example.btl_nhom3.feature_menu.ui.HomeFragment;
 import com.example.btl_nhom3.feature_auth.ui.ProfileFragment;
 import com.example.btl_nhom3.feature_menu.ui.MenuFragment;
+import com.example.btl_nhom3.feature_menu.ui.HistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new HomeFragment();
             } else if (item.getItemId() == R.id.nav_menu) {
                 fragment = new MenuFragment();
+            } else if (item.getItemId() == R.id.nav_history) { // Thêm đoạn này
+                fragment = new HistoryFragment();
             } else if (item.getItemId() == R.id.nav_profile) {
                 fragment = new ProfileFragment();
             } else if (item.getItemId() == R.id.nav_cart) {
                 startActivity(new Intent(this, CartActivity.class));
                 return true;
             }
-
 
             return loadFragment(fragment);
         });

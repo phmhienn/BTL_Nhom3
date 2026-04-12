@@ -29,7 +29,7 @@
 
     <Button
         android:id="@+id/btnCheckout"
-        android:text="Thanh toán"
+        android:text="ĐẶT HÀNG"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
