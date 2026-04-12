@@ -17,5 +17,15 @@ public class CheckoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout);
 
         txtCheckout = findViewById(R.id.txtCheckout);
+
+        int total = getIntent().getIntExtra(CartActivity.EXTRA_TOTAL, 0);
+        int itemCount = getIntent().getIntExtra(CartActivity.EXTRA_ITEM_COUNT, 0);
+
+        if (itemCount <= 0) {
+            txtCheckout.setText("Giỏ hàng trống, chưa thể thanh toán");
+            return;
+        }
+
+        txtCheckout.setText("Thanh toán " + itemCount + " món - Tổng: " + total + "đ");
     }
 }

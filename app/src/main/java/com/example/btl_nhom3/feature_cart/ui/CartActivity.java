@@ -6,24 +6,30 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_nhom3.R;
 import com.example.btl_nhom3.feature_cart.adapter.CartAdapter;
 import com.example.btl_nhom3.feature_cart.model.CartItem;
-import com.example.btl_nhom3.feature_cart.repository.CartRepository;
+import com.example.btl_nhom3.feature_cart.viewmodel.CartViewModel;
 
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
+
+    public static final String EXTRA_TOTAL = "extra_total";
+    public static final String EXTRA_ITEM_COUNT = "extra_item_count";
 
     RecyclerView rvCart;
     TextView txtTotal;
     Button btnCheckout;
 
     CartAdapter adapter;
-    List<CartItem> cartList;
+    CartViewModel viewModel;
+    List<CartItem> currentItems;
+    int currentTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,30 +42,55 @@ public class CartActivity extends AppCompatActivity {
 
         rvCart.setLayoutManager(new LinearLayoutManager(this));
 
-        // lấy data
-        CartRepository repo = new CartRepository();
-        cartList = repo.getCart();
-
-        // adapter
-        adapter = new CartAdapter(cartList);
+        adapter = new CartAdapter(null);
         rvCart.setAdapter(adapter);
 
-        // tính tổng tiền
-        updateTotal();
+        viewModel = new ViewModelProvider(this).get(CartViewModel.class);
+        observeViewModel();
+        viewModel.loadCart();
 
-        // nút thanh toán
+        adapter.setOnCartItemActionListener(new CartAdapter.OnCartItemActionListener() {
+            @Override
+            public void onIncrease(CartItem item) {
+                viewModel.increaseQuantity(item);
+            }
+
+            @Override
+            public void onDecrease(CartItem item) {
+                viewModel.decreaseQuantity(item);
+            }
+
+            @Override
+            public void onRemove(CartItem item) {
+                viewModel.removeItem(item);
+            }
+        });
+
         btnCheckout.setOnClickListener(v -> {
-            startActivity(new Intent(this, CheckoutActivity.class));
+            Intent intent = new Intent(this, CheckoutActivity.class);
+            intent.putExtra(EXTRA_TOTAL, currentTotal);
+            intent.putExtra(EXTRA_ITEM_COUNT, currentItems == null ? 0 : currentItems.size());
+            startActivity(intent);
         });
     }
 
-    private void updateTotal() {
-        int total = 0;
+    private void observeViewModel() {
+        viewModel.getCartItems().observe(this, items -> {
+            currentItems = items;
+            adapter.submitList(items);
+        });
 
-        for (CartItem item : cartList) {
-            total += item.getPrice() * item.getQuantity();
-        }
+        viewModel.getTotal().observe(this, total -> {
+            currentTotal = total == null ? 0 : total;
+            txtTotal.setText("Tổng: " + currentTotal + "đ");
+        });
 
-        txtTotal.setText("Tổng: " + total + "đ");
+        viewModel.getCanCheckout().observe(this, canCheckout -> {
+            boolean enabled = canCheckout != null && canCheckout;
+            btnCheckout.setEnabled(enabled);
+            if (!enabled) {
+                txtTotal.setText("Giỏ hàng đang trống");
+            }
+        });
     }
 }
