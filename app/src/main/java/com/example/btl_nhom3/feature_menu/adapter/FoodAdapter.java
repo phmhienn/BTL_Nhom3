@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_nhom3.R;
+import com.example.btl_nhom3.feature_cart.repository.CartRepository;
 import com.example.btl_nhom3.feature_menu.model.Food;
 import com.example.btl_nhom3.feature_menu.ui.FoodDetailActivity;
 
@@ -53,6 +56,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
             v.getContext().startActivity(intent);
         });
+
+        holder.btnAddToCart.setOnClickListener(v -> {
+            CartRepository.getInstance().addItem(food.getId(), food.getName(), food.getPrice());
+            Toast.makeText(v.getContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -63,6 +71,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgFood;
+        Button btnAddToCart;
         TextView txtName, txtPrice, txtDesc;
 
         public ViewHolder(@NonNull View itemView) {
@@ -72,6 +81,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             txtName = itemView.findViewById(R.id.txtName);
             txtPrice = itemView.findViewById(R.id.txtPrice);
             txtDesc = itemView.findViewById(R.id.txtDesc);
+            btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
         }
     }
 
