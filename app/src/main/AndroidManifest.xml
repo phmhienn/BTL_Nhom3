@@ -16,10 +16,12 @@
         <activity android:name=".feature_cart.ui.CheckoutActivity"/>
         <activity android:name=".feature_menu.ui.SearchActivity"/>
         <activity android:name=".feature_menu.ui.FoodDetailActivity"/>
+        <activity android:name=".feature_admin.ui.AddFoodActivity"/>
+        <activity android:name=".feature_admin.ui.ManageFoodActivity"/>
+        <activity android:name=".feature_admin.ui.AdminDashboardActivity"/>
         <activity android:name=".MainActivity" />
 
-        <!-- Login là launcher mới -->
-        <activity
+       <activity
             android:name=".feature_auth.ui.LoginActivity"
             android:exported="true">
             <intent-filter>
