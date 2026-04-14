@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import com.example.btl_nhom3.feature_admin.ui.AdminDashboardActivity;
 
 import com.example.btl_nhom3.MainActivity;
 import com.example.btl_nhom3.R;
@@ -93,9 +94,10 @@ public class LoginActivity extends AppCompatActivity {
 		viewModel.getLoginUser().observe(this, user -> {
 			if (user != null) {
 				saveSession(user);
-				goToMain();
+				goAfterLogin(user);
 			}
 		});
+
 	}
 
 	private void renderLoading(Boolean isLoading) {
@@ -112,9 +114,15 @@ public class LoginActivity extends AppCompatActivity {
 				.apply();
 	}
 
-	private void goToMain() {
-		Intent intent = new Intent(this, MainActivity.class);
+	private void goAfterLogin(User user) {
+		Intent intent;
+		if (user.isAdmin()) {
+			intent = new Intent(this, AdminDashboardActivity.class);
+		} else {
+			intent = new Intent(this, MainActivity.class);
+		}
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		startActivity(intent);
 	}
+
 }
