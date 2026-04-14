@@ -88,6 +88,8 @@ public class AddFoodActivity extends AppCompatActivity {
             edtName.setEnabled(false);
         }
 
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        findViewById(R.id.btnCancel).setOnClickListener(v -> finish());
         // ================= NÚT SAVE =================
         btnSave.setOnClickListener(v -> {
 

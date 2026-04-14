@@ -31,6 +31,7 @@ public class ManageOrderActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewOrder);
         repository = new AdminRepository(this);
         btnFilter = findViewById(R.id.btnFilter);
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
         btnFilter.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(this, btnFilter);
