@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:background="#F5F5F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!-- HEADER -->
     <LinearLayout
         android:orientation="vertical"
         android:padding="16dp"
@@ -12,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Quản lý món ăn"
+            android:text="Quản lý đơn hàng"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#000"
@@ -20,7 +23,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Danh sách món ăn hiện tại"
+            android:text="Danh sách đơn hiện tại"
             android:textSize="14sp"
             android:textColor="#666"
             android:layout_marginTop="4dp"
@@ -29,39 +32,25 @@
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_margin="12dp"
+        android:gravity="end"
         android:padding="10dp"
-        android:background="@drawable/bg_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/edtSearch"
-            android:hint="Tìm món ăn..."
-            android:textSize="15sp"
-            android:textColor="@color/textDark"
-            android:background="@android:color/transparent"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
         <ImageView
-            android:id="@+id/btnSearch"
-            android:src="@android:drawable/ic_menu_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
+            android:id="@+id/btnFilter"
+            android:src="@drawable/ic_filter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
     </LinearLayout>
 
+    <!-- DANH SÁCH -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFood"
+        android:id="@+id/recyclerViewOrder"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent"/>
 
-    <Button
-        android:id="@+id/btnAddFood"
-        android:text="Thêm món"
-        android:background="@drawable/bg_food"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </LinearLayout>

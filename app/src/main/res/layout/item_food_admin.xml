@@ -7,59 +7,72 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- Tên -->
-    <TextView
-        android:id="@+id/txtName"
-        android:text="Burger bò"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="#333"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- Giá -->
-    <TextView
-        android:id="@+id/txtPrice"
-        android:text="50000 VNĐ"
-        android:textSize="14sp"
-        android:textColor="#666"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- Số lượng -->
-    <TextView
-        android:id="@+id/txtQuantity"
-        android:text="Số lượng: 10"
-        android:textSize="13sp"
-        android:textColor="#888"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- Sửa | Xoá -->
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_marginTop="6dp"
-        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/btnEdit"
-            android:text="Sửa"
-            android:textColor="#2196F3"
-            android:textStyle="bold"
-            android:layout_marginEnd="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <!-- ẢNH -->
+        <ImageView
+            android:id="@+id/imgFood"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"/>
 
-        <TextView
-            android:id="@+id/btnDelete"
-            android:text="Xoá"
-            android:textColor="#FF0000"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <!-- NỘI DUNG -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtName"
+                android:text="Tên món"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/txtPrice"
+                android:text="Giá"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/txtQuantity"
+                android:text="Số lượng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/btnEdit"
+                    android:text="Sửa"
+                    android:textColor="#2196F3"
+                    android:layout_marginEnd="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/btnDelete"
+                    android:text="Xoá"
+                    android:textColor="#F44336"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

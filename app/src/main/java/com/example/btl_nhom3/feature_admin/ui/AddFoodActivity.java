@@ -1,9 +1,12 @@
 package com.example.btl_nhom3.feature_admin.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +20,9 @@ public class AddFoodActivity extends AppCompatActivity {
     private EditText edtName, edtPrice, edtDesc,edtQuantity;
     private Button btnSave;
     private AdminRepository repository;
+    ImageView imgFood;
+    Button btnChooseImage;
+    String imagePath = "";
 
     private int foodId = -1; // 👉 phân biệt thêm / sửa
 
@@ -30,6 +36,13 @@ public class AddFoodActivity extends AppCompatActivity {
         edtDesc = findViewById(R.id.edtDesc);
         edtQuantity = findViewById(R.id.edtQuantity);
         btnSave = findViewById(R.id.btnSave);
+        imgFood = findViewById(R.id.imgFood);
+
+        imgFood.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, 1);
+        });
 
         repository = new AdminRepository(this);
 
@@ -77,8 +90,13 @@ public class AddFoodActivity extends AppCompatActivity {
                     Toast.makeText(this, "Nhập tên món", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                imagePath = getIntent().getStringExtra("image");
 
-                Food food = new Food(name, price, desc, "default", quantity, 1);
+                if (imagePath != null && !imagePath.isEmpty()) {
+                    imgFood.setImageURI(Uri.parse(imagePath));
+                }
+
+                Food food = new Food(name, price, desc,imagePath, quantity, 1);
                 repository.insertFood(food);
 
                 Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
@@ -97,5 +115,15 @@ public class AddFoodActivity extends AppCompatActivity {
 
             finish();
         });
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            imgFood.setImageURI(uri);
+
+            imagePath = uri.toString(); // 👉 lưu path
+        }
     }
 }

@@ -76,6 +76,11 @@ public class Database extends SQLiteOpenHelper {
                 "('admin','123456','Quan tri vien','0900000000','Viet Nam','admin')");
         db.execSQL("INSERT INTO users (username,password,fullname,phone,address,role) VALUES " +
                 "('user','123456','Nguoi dung demo','0911111111','Viet Nam','user')");
+        db.execSQL("INSERT INTO users (username,password,fullname,phone,address,role) VALUES " +
+                "('user1','123456','Nguyễn Văn A','0900000001','Hà Nội','user')");
+
+        db.execSQL("INSERT INTO users (username,password,fullname,phone,address,role) VALUES " +
+                "('user2','123456','Trần Thị B','0900000002','Hồ Chí Minh','user')");
 
         // categories
         db.execSQL("INSERT INTO categories VALUES (0,'Tất cả','all')");
@@ -91,6 +96,31 @@ public class Database extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO foods (name,price,description,image,quantity,category_id) VALUES " +
                 "('Trà sữa',30000,'Trà sữa trân châu','trasua',20,2)");
+        // ================= ORDERS =================
+        db.execSQL("INSERT INTO orders (user_id,total_price,status,created_at,address) VALUES " +
+                "(2,100000,'Đang xử lý','2026-01-01','Hà Nội')");
+
+        db.execSQL("INSERT INTO orders (user_id,total_price,status,created_at,address) VALUES " +
+                "(3,120000,'Đang giao','2026-01-02','Hồ Chí Minh')");
+
+        db.execSQL("INSERT INTO orders (user_id,total_price,status,created_at,address) VALUES " +
+                "(4,80000,'Hoàn thành','2026-01-03','Đà Nẵng')");
+
+        db.execSQL("INSERT INTO orders (user_id,total_price,status,created_at,address) VALUES " +
+                "(2,30000,'Đã huỷ','2026-01-04','Cần Thơ')");
+        // ================= ORDER ITEMS =================
+        // Đơn 1
+        db.execSQL("INSERT INTO order_items (order_id,food_id,quantity,price) VALUES (1,1,2,50000)");
+
+// Đơn 2
+        db.execSQL("INSERT INTO order_items (order_id,food_id,quantity,price) VALUES (2,2,1,120000)");
+
+// Đơn 3
+        db.execSQL("INSERT INTO order_items (order_id,food_id,quantity,price) VALUES (3,1,1,50000)");
+        db.execSQL("INSERT INTO order_items (order_id,food_id,quantity,price) VALUES (3,3,1,30000)");
+
+// Đơn 4
+        db.execSQL("INSERT INTO order_items (order_id,food_id,quantity,price) VALUES (4,3,1,30000)");
     }
 
     @Override
