@@ -65,4 +65,8 @@ public class CartRepository {
         }
         return total;
     }
+
+    public void clearCart() {
+        cartItems.clear();
+    }
 }

@@ -36,7 +36,7 @@ public class SearchActivity extends AppCompatActivity {
 
         rvSearch.setLayoutManager(new LinearLayoutManager(this));
 
-        MenuRepository repo = new MenuRepository();
+        MenuRepository repo = new MenuRepository(this);
         fullList = repo.getFoods();
         filteredList = new ArrayList<>(fullList);
 

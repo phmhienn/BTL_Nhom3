@@ -1,6 +1,11 @@
 package com.example.btl_nhom3.feature_menu.repository;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.example.btl_nhom3.R;
+import com.example.btl_nhom3.core.database.Database;
 import com.example.btl_nhom3.feature_menu.model.Category;
 import com.example.btl_nhom3.feature_menu.model.Food;
 
@@ -9,33 +14,59 @@ import java.util.List;
 
 public class MenuRepository {
 
-    // CATEGORY
+    private Database dbHelper;
+    private Context context;
+
+    public MenuRepository(Context context) {
+        this.context = context;
+        this.dbHelper = new Database(context);
+    }
+
+    // Lấy danh sách Category từ DB
     public List<Category> getCategories() {
         List<Category> list = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM categories", null);
 
-        list.add(new Category(0, "Tất cả", R.drawable.ic_launcher_background));
-        list.add(new Category(1, "Đồ ăn", R.drawable.ic_launcher_background));
-        list.add(new Category(2, "Đồ uống", R.drawable.ic_launcher_background));
-
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                // Ở đây tạm thời dùng icon mặc định, bạn có thể map icon từ text trong DB
+                list.add(new Category(id, name, R.drawable.ic_launcher_background));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
         return list;
     }
 
-    // FOOD
+    // Lấy danh sách Food từ DB
     public List<Food> getFoods() {
         List<Food> list = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        list.add(new Food(1, "Burger bò", 50000, 1,
-                R.drawable.ic_launcher_background,
-                "Burger bò siêu ngon với phô mai", 10));
+        Cursor cursor = db.rawQuery("SELECT * FROM foods", null);
 
-        list.add(new Food(2, "Pizza hải sản", 120000, 1,
-                R.drawable.ic_launcher_background,
-                "Pizza đầy topping hải sản", 5));
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                int price = cursor.getInt(cursor.getColumnIndexOrThrow("price"));
+                String desc = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+                String imgName = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+                int quantity = cursor.getInt(cursor.getColumnIndexOrThrow("quantity"));
+                int categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
 
-        list.add(new Food(3, "Trà sữa", 30000, 2,
-                R.drawable.ic_launcher_background,
-                "Trà sữa trân châu đường đen", 20));
+                // Chuyển tên ảnh (string) thành Resource ID
+                int imageResId = context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
+                if (imageResId == 0) {
+                    imageResId = R.drawable.ic_launcher_background; // Ảnh mặc định nếu không tìm thấy
+                }
 
+                list.add(new Food(id, name, price, categoryId, imageResId, desc, quantity));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
         return list;
     }
 }

@@ -1,65 +1,79 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:layout_marginHorizontal="12dp"
-    android:layout_marginTop="10dp"
-    android:background="@drawable/bg_food"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
 
-    <!-- Tên -->
-    <TextView
-        android:id="@+id/txtName"
-        android:text="Burger bò"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="#333"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- Giá -->
-    <TextView
-        android:id="@+id/txtPrice"
-        android:text="50000 VNĐ"
-        android:textSize="14sp"
-        android:textColor="#666"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- Số lượng -->
-    <TextView
-        android:id="@+id/txtQuantity"
-        android:text="Số lượng: 10"
-        android:textSize="13sp"
-        android:textColor="#888"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- Sửa | Xoá -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_marginTop="6dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/btnEdit"
-            android:text="Sửa"
-            android:textColor="#2196F3"
-            android:textStyle="bold"
-            android:layout_marginEnd="16dp"
+            android:id="@+id/txtName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Tên món ăn"
+            android:textColor="@color/textDark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/btnDelete"
-            android:text="Xoá"
-            android:textColor="#FF0000"
-            android:textStyle="bold"
+            android:id="@+id/txtPrice"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="50.000 VNĐ"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Số lượng: 10"
+            android:textColor="@color/textLight"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="12dp"
+            android:background="#EEEEEE" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:padding="8dp"
+                android:text="SỬA"
+                android:textColor="#2196F3"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="XOÁ"
+                android:textColor="#FF5252"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

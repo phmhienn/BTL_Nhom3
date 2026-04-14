@@ -19,6 +19,8 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+
         txtCheckout = findViewById(R.id.txtCheckout);
 
         int total = getIntent().getIntExtra(EXTRA_TOTAL, 0);

@@ -49,7 +49,7 @@ public class MenuFragment extends Fragment {
         rvFood.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // LẤY DATA TRỰC TIẾP
-        MenuRepository repo = new MenuRepository();
+        MenuRepository repo = new MenuRepository(getContext());
         fullList = repo.getFoods();
 
         filteredList = new ArrayList<>(fullList);
@@ -76,6 +76,18 @@ public class MenuFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData(); // Gọi hàm load lại dữ liệu mỗi khi Fragment hiển thị lại
+    }
+
+    private void loadData() {
+        MenuRepository repo = new MenuRepository(getContext());
+        fullList = repo.getFoods();
+        applyFilter(); // Cập nhật lại list đang hiển thị
     }
 
     private void applyFilter() {
