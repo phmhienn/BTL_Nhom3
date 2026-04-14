@@ -1,8 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+<<<<<<< HEAD
     <style name="Base.Theme.BTL_Nhom3" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#00FAFF</item>
         <item name="colorSecondary">#32B9FF</item>
+=======
+    <style name="Base.Theme.BTL_Nhom3" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+>>>>>>> de7a91fada4169096b786f8a652bba5b53567e42
     </style>
 
     <style name="Theme.BTL_Nhom3" parent="Base.Theme.BTL_Nhom3" />
