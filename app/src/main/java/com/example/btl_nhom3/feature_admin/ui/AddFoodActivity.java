@@ -1,11 +1,14 @@
 package com.example.btl_nhom3.feature_admin.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,9 @@ public class AddFoodActivity extends AppCompatActivity {
     private Spinner spnCategory;
     private Button btnSave;
     private AdminRepository repository;
+    ImageView imgFood;
+    Button btnChooseImage;
+    String imagePath = "";
     private CategoryRepository categoryRepository;
     private List<Category> categories;
 
@@ -40,7 +46,13 @@ public class AddFoodActivity extends AppCompatActivity {
         edtQuantity = findViewById(R.id.edtQuantity);
         spnCategory = findViewById(R.id.spnCategory);
         btnSave = findViewById(R.id.btnSave);
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        imgFood = findViewById(R.id.imgFood);
+
+        imgFood.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, 1);
+        });
 
         repository = new AdminRepository(this);
         categoryRepository = new CategoryRepository(this);
@@ -109,8 +121,13 @@ public class AddFoodActivity extends AppCompatActivity {
                     Toast.makeText(this, "Nhập tên món", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                imagePath = getIntent().getStringExtra("image");
 
-                Food food = new Food(name, price, desc, "default", quantity, categoryId);
+                if (imagePath != null && !imagePath.isEmpty()) {
+                    imgFood.setImageURI(Uri.parse(imagePath));
+                }
+
+                Food food = new Food(name, price, desc, imagePath, quantity, categoryId);
                 repository.insertFood(food);
 
                 Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
@@ -129,5 +146,15 @@ public class AddFoodActivity extends AppCompatActivity {
 
             finish();
         });
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            imgFood.setImageURI(uri);
+
+            imagePath = uri.toString(); // 👉 lưu path
+        }
     }
 }
