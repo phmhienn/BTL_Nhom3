@@ -3,13 +3,8 @@ package com.example.btl_nhom3.feature_order.ui;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.btl_nhom3.R;
-import com.example.btl_nhom3.feature_order.adapter.OrderDetailAdapter;
-import com.example.btl_nhom3.feature_order.repository.OrderRepository;
-import java.util.List;
-import java.util.Map;
 
 public class OrderStatusActivity extends AppCompatActivity {
     @Override
