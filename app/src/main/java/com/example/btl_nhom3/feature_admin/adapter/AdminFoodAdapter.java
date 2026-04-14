@@ -3,9 +3,11 @@ package com.example.btl_nhom3.feature_admin.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +26,7 @@ public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.View
     private List<Food> list;
     private List<Food> originalList;
     private AdminRepository repository;
+    ImageView imgFood;
 
     public AdminFoodAdapter(Context context, List<Food> list) {
         this.context = context;
@@ -56,7 +59,7 @@ public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtPrice,txtQuantity, btnDelete,btnEdit;
+        TextView txtName, txtPrice,txtQuantity, btnDelete,btnEdit;ImageView imgFood;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -65,12 +68,14 @@ public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.View
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
+            imgFood = itemView.findViewById(R.id.imgFood);
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_food_admin, parent, false);
+
         return new ViewHolder(view);
     }
 
@@ -81,6 +86,10 @@ public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.View
         holder.txtName.setText(food.getName());
         holder.txtPrice.setText(food.getPrice() + " VNĐ");
         holder.txtQuantity.setText("Số lượng: " + food.getQuantity());
+
+        if (food.getImage() != null && !food.getImage().isEmpty()) {
+            holder.imgFood.setImageURI(Uri.parse(food.getImage()));
+        }
 
         holder.btnDelete.setOnClickListener(v -> {
             new AlertDialog.Builder(context)
@@ -99,6 +108,7 @@ public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.View
             Intent intent = new Intent(context, AddFoodActivity.class);
 
             intent.putExtra("id", food.getId());
+            intent.putExtra("image", food.getImage());
             intent.putExtra("name", food.getName());
             intent.putExtra("price", food.getPrice());
             intent.putExtra("quantity", food.getQuantity());

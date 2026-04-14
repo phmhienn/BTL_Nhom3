@@ -19,6 +19,7 @@
         <activity android:name=".feature_menu.ui.FoodDetailActivity"/>
         <activity android:name=".feature_admin.ui.AddFoodActivity"/>
         <activity android:name=".feature_admin.ui.ManageFoodActivity"/>
+        <activity android:name=".feature_admin.ui.ManageOrderActivity"/>
         <activity android:name=".feature_admin.ui.AdminDashboardActivity"/>
         <activity android:name=".MainActivity" />
 
