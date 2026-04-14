@@ -13,6 +13,7 @@ import com.example.btl_nhom3.feature_menu.ui.HomeFragment;
 import com.example.btl_nhom3.feature_menu.ui.MenuFragment;
 import com.example.btl_nhom3.feature_profile.ui.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.btl_nhom3.feature_menu.ui.HistoryFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new HomeFragment();
             } else if (item.getItemId() == R.id.nav_menu) {
                 fragment = new MenuFragment();
+            } else if (item.getItemId() == R.id.nav_history) {
+                fragment = new HistoryFragment();
             } else if (item.getItemId() == R.id.nav_profile) {
 				if (isLoggedIn()) {
 					fragment = new ProfileFragment();
