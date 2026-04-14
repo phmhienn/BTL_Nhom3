@@ -52,11 +52,13 @@ public class Database extends SQLiteOpenHelper {
         // ORDERS
         db.execSQL("CREATE TABLE orders (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "user_id INTEGER," +
+                "username TEXT," +
                 "total_price INTEGER," +
                 "status TEXT," +
                 "created_at TEXT," +
-                "address TEXT)");
+                "address TEXT," +
+                "phone TEXT)");
+
 
         // ORDER ITEMS
         db.execSQL("CREATE TABLE order_items (" +

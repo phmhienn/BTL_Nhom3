@@ -17,7 +17,9 @@
             android:label="@string/title_activity_item_profile_option"
             android:theme="@style/Theme.BTL_Nhom3" />
         <activity android:name=".feature_auth.ui.RegisterActivity" />
-        <activity android:name=".feature_cart.ui.CartActivity" />
+        <activity android:name=".feature_order.ui.CartFragment" />
+        <activity android:name=".feature_order.ui.OrderStatusActivity" />
+        <activity android:name=".feature_order.ui.OrderActivity" />
         <activity android:name=".feature_cart.ui.CheckoutActivity" />
         <activity android:name=".feature_menu.ui.SearchActivity" />
         <activity android:name=".feature_menu.ui.FoodDetailActivity" />
