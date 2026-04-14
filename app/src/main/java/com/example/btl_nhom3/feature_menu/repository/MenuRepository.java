@@ -32,8 +32,9 @@ public class MenuRepository {
             do {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                // Ở đây tạm thời dùng icon mặc định, bạn có thể map icon từ text trong DB
-                list.add(new Category(id, name, R.drawable.ic_launcher_background));
+                int icon = context.getResources().getIdentifier(cursor.getString(cursor.getColumnIndexOrThrow("icon")), "drawable", context.getPackageName());
+
+                list.add(new Category(id, name, icon));
             } while (cursor.moveToNext());
         }
         cursor.close();

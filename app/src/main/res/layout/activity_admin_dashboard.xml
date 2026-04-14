@@ -5,15 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TIÊU ĐỀ -->
-    <TextView
-        android:text="FastFood App"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="KiKiFud"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnLogout"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </RelativeLayout>
 
     <!-- ===== QUẢN LÝ MÓN ===== -->
     <LinearLayout
@@ -70,6 +85,66 @@
 
         <TextView
             android:text="Xem và xử lý đơn hàng"
+            android:textColor="#666"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnManageUser"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/bg_food"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:elevation="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Quản lý tài khoản"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Xem và xử lý tài khoản"
+            android:textColor="#666"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnManageCategory"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/bg_food"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:elevation="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Quản lý danh mục"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Thêm, sửa, xoá danh mục"
             android:textColor="#666"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"

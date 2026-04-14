@@ -96,9 +96,20 @@ public class MenuFragment extends Fragment {
 
         filteredList.clear();
 
-        for (Food f : fullList) {
+        // Lấy danh sách Categories từ Repo
+        MenuRepository repo = new MenuRepository(getContext());
+        List<com.example.btl_nhom3.feature_menu.model.Category> categories = repo.getCategories();
 
-            boolean matchCategory = (currentCategory == 0 || f.getCategoryId() == currentCategory);
+        int allCategoryId = -1;
+        if (!categories.isEmpty()) {
+            allCategoryId = categories.get(0).getId();
+        }
+
+        // Nếu lúc mới mở (currentCategory == 0) hoặc chưa chọn gì, mặc định là show ALL
+        boolean isAll = (currentCategory == 0 || currentCategory == allCategoryId);
+
+        for (Food f : fullList) {
+            boolean matchCategory = isAll || (f.getCategoryId() == currentCategory);
             boolean matchName = f.getName().toLowerCase().contains(keyword);
 
             if (matchCategory && matchName) {

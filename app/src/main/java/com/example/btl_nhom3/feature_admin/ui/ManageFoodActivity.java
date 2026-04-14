@@ -44,6 +44,7 @@ public class ManageFoodActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewFood);
         btnAdd = findViewById(R.id.btnAddFood);
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
         repository = new AdminRepository(this);
 

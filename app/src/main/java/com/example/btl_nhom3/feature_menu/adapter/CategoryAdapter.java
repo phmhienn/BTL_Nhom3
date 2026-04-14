@@ -40,7 +40,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Category c = list.get(position);
         holder.txtName.setText(c.getName());
-        holder.imgIcon.setImageResource(c.getImage());
+        holder.imgIcon.setImageResource(c.getIcon());
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {

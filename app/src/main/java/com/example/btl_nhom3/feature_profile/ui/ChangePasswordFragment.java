@@ -34,6 +34,7 @@ public class ChangePasswordFragment extends Fragment {
         edtConfirmPassword = view.findViewById(R.id.edtConfirmPassword);
         Button btnSubmit = view.findViewById(R.id.btnSubmitChangePassword);
         Button btnCancel = view.findViewById(R.id.btnCancelChangePassword);
+        View btnBack = view.findViewById(R.id.btnBack);
 
         btnSubmit.setOnClickListener(v -> viewModel.changePassword(
                 edtCurrentPassword.getText().toString(),
@@ -42,6 +43,7 @@ public class ChangePasswordFragment extends Fragment {
         ));
 
         btnCancel.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+        btnBack.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
         return view;
     }

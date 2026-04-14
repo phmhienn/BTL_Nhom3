@@ -35,6 +35,7 @@ public class ChangeInfoFragment extends Fragment {
         edtAddress = view.findViewById(R.id.edtAddress);
         Button btnSubmit = view.findViewById(R.id.btnSubmitChangeInfo);
         Button btnCancel = view.findViewById(R.id.btnCancelChangeInfo);
+        View btnBack = view.findViewById(R.id.btnBack);
 
         btnSubmit.setOnClickListener(v -> viewModel.updateProfile(
                 edtFullName.getText().toString(),
@@ -43,6 +44,7 @@ public class ChangeInfoFragment extends Fragment {
         ));
 
         btnCancel.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+        btnBack.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
         return view;
     }
@@ -76,6 +78,8 @@ public class ChangeInfoFragment extends Fragment {
         edtPhone.setText(safe(user.getPhone()));
         edtAddress.setText(safe(user.getAddress()));
     }
+
+
 
     private String safe(String value) {
         return value == null ? "" : value;
