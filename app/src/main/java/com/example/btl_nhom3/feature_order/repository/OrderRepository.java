@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.btl_nhom3.core.database.Database;
+import com.example.btl_nhom3.feature_cart.model.CartItem;
+import com.example.btl_nhom3.feature_cart.repository.CartRepository;
 import com.example.btl_nhom3.feature_order.model.Order;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,14 +38,21 @@ public class OrderRepository {
             long orderId = db.insert("orders", null, values);
 
             // Chuyển dữ liệu từ cart sang order_items dựa trên user_id
-            String sql = "INSERT INTO order_items (order_id, food_id, quantity, price) " +
-                    "SELECT " + orderId + ", c.food_id, c.quantity, f.price " +
-                    "FROM cart c INNER JOIN foods f ON c.food_id = f.id " +
-                    "WHERE c.user_id = (SELECT id FROM users WHERE username = ?)";
-            db.execSQL(sql, new String[]{username});
+            CartRepository cartRepo = CartRepository.getInstance();
+            List<CartItem> cartItems = cartRepo.getCart();
 
-            // Xóa giỏ hàng
-            db.execSQL("DELETE FROM cart WHERE user_id = (SELECT id FROM users WHERE username = ?)", new String[]{username});
+            for (CartItem item : cartItems) {
+                ContentValues itemValues = new ContentValues();
+                itemValues.put("order_id", orderId);
+                itemValues.put("food_id", item.getId());
+                itemValues.put("quantity", item.getQuantity());
+                itemValues.put("price", item.getPrice());
+
+                db.insert("order_items", null, itemValues);
+            }
+
+            // xoá giỏ sau khi đặt
+            cartRepo.clearCart();
 
             db.setTransactionSuccessful();
             return orderId;
