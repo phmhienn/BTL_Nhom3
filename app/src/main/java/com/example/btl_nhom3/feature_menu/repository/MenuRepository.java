@@ -59,7 +59,13 @@ public class MenuRepository {
                 int categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
 
                 // Chuyển tên ảnh (string) thành Resource ID
-                int imageResId = context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
+                int imageResId = 0;
+                try {
+                    imageResId = context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
+                } catch (Exception e) {
+                    imageResId = 0;
+                }
+
                 if (imageResId == 0) {
                     imageResId = R.drawable.ic_launcher_background; // Ảnh mặc định nếu không tìm thấy
                 }

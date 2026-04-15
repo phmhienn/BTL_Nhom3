@@ -63,8 +63,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.txtItems.setText(builder.toString());
 
         // ================= TỔNG TIỀN =================
-        int total = repository.getTotalByOrder(order.getId());
-        holder.txtTotal.setText("Tổng: " + total + " VNĐ");
+        holder.txtTotal.setText("Tổng: " + order.getTotalPrice() + " VNĐ");
         holder.txtDate.setText("Ngày đặt: " + order.getCreatedAt());
 
         // ================= TRẠNG THÁI =================

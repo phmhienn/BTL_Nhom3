@@ -86,7 +86,7 @@ public class AdminRepository {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM orders",
+                "SELECT * FROM orders ORDER BY id DESC",
                 null
         );
 
@@ -115,16 +115,19 @@ public class AdminRepository {
         List<String> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+        // Query JOIN bảng order_items với bảng foods để lấy tên món ăn
         Cursor cursor = db.rawQuery(
                 "SELECT f.name, oi.quantity FROM order_items oi " +
-                        "JOIN foods f ON oi.food_id = f.id " +
+                        "INNER JOIN foods f ON oi.food_id = f.id " +
                         "WHERE oi.order_id = ?",
                 new String[]{String.valueOf(orderId)}
         );
 
         if (cursor.moveToFirst()) {
             do {
-                list.add(cursor.getString(0) + " (x" + cursor.getInt(1) + ")");
+                String foodName = cursor.getString(0);
+                int qty = cursor.getInt(1);
+                list.add(foodName + " (x" + qty + ")");
             } while (cursor.moveToNext());
         }
 

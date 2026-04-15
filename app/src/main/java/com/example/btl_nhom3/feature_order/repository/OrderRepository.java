@@ -63,16 +63,16 @@ public class OrderRepository {
         Cursor c = db.rawQuery(sql, new String[]{username});
 
         while (c.moveToNext()) {
-            // Thứ tự các cột phải khớp với cấu trúc bảng orders
-            list.add(new Order(
-                    c.getInt(0),    // id
-                    c.getString(1), // username
-                    c.getInt(2),    // total_price
-                    c.getString(3), // status
-                    c.getString(4), // created_at
-                    c.getString(5), // address
-                    c.getString(6)  // phone
-            ));
+            // Sử dụng getColumnIndexOrThrow để tránh lỗi sai thứ tự cột
+            int id = c.getInt(c.getColumnIndexOrThrow("id"));
+            String user = c.getString(c.getColumnIndexOrThrow("username"));
+            int price = c.getInt(c.getColumnIndexOrThrow("total_price"));
+            String status = c.getString(c.getColumnIndexOrThrow("status"));
+            String date = c.getString(c.getColumnIndexOrThrow("created_at"));
+            String addr = c.getString(c.getColumnIndexOrThrow("address"));
+            String phone = c.getString(c.getColumnIndexOrThrow("phone"));
+
+            list.add(new Order(id, user, price, status, date, addr, phone));
         }
         c.close();
         return list;
