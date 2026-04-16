@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BTL_Nhom3">
+        <activity android:name=".feature_account.ui.ManageAccountActivity" />
         <activity android:name=".feature_admin.ui.ManageCategoryActivity"/>
         <activity android:name=".feature_order.ui.OrderStatusActivity" />
         <activity android:name=".feature_order.ui.OrderActivity" />
@@ -22,10 +23,10 @@
         <activity android:name=".feature_admin.ui.ManageFoodActivity"/>
         <activity android:name=".feature_admin.ui.ManageOrderActivity"/>
         <activity android:name=".feature_admin.ui.AdminDashboardActivity"/>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".feature_auth.ui.LoginActivity" />
 
        <activity
-            android:name=".feature_auth.ui.LoginActivity"
+            android:name=".MainActivity"
 
             android:exported="true">
             <intent-filter>

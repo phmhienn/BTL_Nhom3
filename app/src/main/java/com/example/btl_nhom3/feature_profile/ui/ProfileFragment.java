@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
 
     btnEditProfile.setOnClickListener(v -> openChangeInfoFragment());
     btnChangePassword.setOnClickListener(v -> openChangePasswordFragment());
-		btnLogout.setOnClickListener(v -> logout());
+    btnLogout.setOnClickListener(v -> logout());
 
 		return view;
     }
@@ -108,7 +108,7 @@ public class ProfileFragment extends Fragment {
   private void logout() {
       // 1. Xóa sạch SharedPreferences để không bị lưu tên User cũ
       // Lưu ý: Kiểm tra xem tên file "USER" có khớp với lúc bạn Login không nhé
-      SharedPreferences pref = getActivity().getSharedPreferences("UserFile", Context.MODE_PRIVATE);
+      SharedPreferences pref = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
       SharedPreferences.Editor editor = pref.edit();
       editor.clear();
       editor.apply();

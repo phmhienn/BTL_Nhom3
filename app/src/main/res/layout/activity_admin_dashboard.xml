@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,18 +19,6 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/btnLogout"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:padding="4dp"
-            android:src="@drawable/ic_launcher_foreground"
-            android:background="?attr/selectableItemBackgroundBorderless" />
-    </RelativeLayout>
-
-    <!-- ===== QUẢN LÝ MÓN ===== -->
     <LinearLayout
         android:id="@+id/btnManageFood"
         android:orientation="vertical"
@@ -151,5 +139,18 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng xuất"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:background="@color/primary"
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground" />
 
 </LinearLayout>

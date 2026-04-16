@@ -2,18 +2,20 @@ package com.example.btl_nhom3.feature_admin.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.btl_nhom3.R;
+import com.example.btl_nhom3.feature_account.ui.ManageAccountActivity;
 import com.example.btl_nhom3.feature_auth.ui.LoginActivity;
 
 public class AdminDashboardActivity extends AppCompatActivity {
 
     private LinearLayout btnManageFood, btnManageOrder, btnManageUser, btnManageCategory;
-    private ImageView btnLogout;
+    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         // Quản lý tài khoản
         btnManageUser.setOnClickListener(v -> {
-            // startActivity(new Intent(this, ManageUserActivity.class));
+            startActivity(new Intent(this, ManageAccountActivity.class));
         });
 
         // Quản lý danh mục
