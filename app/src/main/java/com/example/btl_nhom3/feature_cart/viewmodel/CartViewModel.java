@@ -48,6 +48,11 @@ public class CartViewModel extends ViewModel {
 		refreshState();
 	}
 
+	public void setQuantity(CartItem item, int quantity) {
+		repository.updateQuantity(item.getId(), quantity);
+		refreshState();
+	}
+
 	private void refreshState() {
 		List<CartItem> items = repository.getCart();
 		cartItems.setValue(items);
