@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.btl_nhom3.MainActivity;
 import com.example.btl_nhom3.R;
 import com.example.btl_nhom3.feature_cart.adapter.CartAdapter;
 import com.example.btl_nhom3.feature_cart.model.CartItem;
@@ -72,6 +71,11 @@ public class CartFragment extends Fragment {
             public void onRemove(CartItem item) {
                 viewModel.removeItem(item);
             }
+
+            @Override
+            public void onSetQuantity(CartItem item, int quantity) {
+                viewModel.setQuantity(item, quantity);
+            }
         });
 
         btnCheckout.setText("Đặt hàng");
@@ -104,5 +108,6 @@ public class CartFragment extends Fragment {
             }
         });
     }
+
 }
 

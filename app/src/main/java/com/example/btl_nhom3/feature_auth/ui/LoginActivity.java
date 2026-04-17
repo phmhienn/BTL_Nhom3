@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
 	private EditText edtUsername;
 	private EditText edtPassword;
 	private TextView txtError;
-	private ProgressBar progressLogin;
 	private TextView txtRegisterNow;
 
 	private AuthViewModel viewModel;
@@ -59,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
 		edtUsername = findViewById(R.id.edtUsername);
 		edtPassword = findViewById(R.id.edtPassword);
 		txtError = findViewById(R.id.txtError);
-		progressLogin = findViewById(R.id.progressLogin);
 		txtRegisterNow = findViewById(R.id.txtRegisterNow);
 		Button btnLogin = findViewById(R.id.btnLogin);
 

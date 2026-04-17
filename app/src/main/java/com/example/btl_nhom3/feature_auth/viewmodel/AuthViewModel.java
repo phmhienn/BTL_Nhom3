@@ -22,10 +22,6 @@ public class AuthViewModel extends AndroidViewModel {
 		repository = new AuthRepository(application);
 	}
 
-	public LiveData<Boolean> getLoading() {
-		return loading;
-	}
-
 	public LiveData<User> getLoginUser() {
 		return loginUser;
 	}
