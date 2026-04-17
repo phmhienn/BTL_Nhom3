@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#F5F5F5">
 
-    <!-- Header -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +18,6 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@android:drawable/ic_menu_revert"
-            android:layout_centerVertical="true"
             app:tint="@android:color/black" />
 
         <TextView
@@ -111,7 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Quay lại"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                android:backgroundTint="@color/primary"
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
     </ScrollView>

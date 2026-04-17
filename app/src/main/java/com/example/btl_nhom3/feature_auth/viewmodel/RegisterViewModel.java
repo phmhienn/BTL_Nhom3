@@ -13,7 +13,6 @@ import com.example.btl_nhom3.feature_auth.repository.AuthRepository;
 public class RegisterViewModel extends AndroidViewModel {
 
     private final AuthRepository repository;
-    private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<User> registerUser = new MutableLiveData<>();
     private final MutableLiveData<String> registerMessage = new MutableLiveData<>();
 
@@ -22,9 +21,6 @@ public class RegisterViewModel extends AndroidViewModel {
         repository = new AuthRepository(application);
     }
 
-    public LiveData<Boolean> getLoading() {
-        return loading;
-    }
 
     public LiveData<User> getRegisterUser() {
         return registerUser;
@@ -58,9 +54,7 @@ public class RegisterViewModel extends AndroidViewModel {
             return;
         }
 
-        loading.setValue(true);
         User user = repository.register(safeUsername, safePassword, safeFullName, safePhone, safeAddress);
-        loading.setValue(false);
 
         if (user == null) {
             registerMessage.setValue("Đăng ký thất bại, vui lòng thử lại");

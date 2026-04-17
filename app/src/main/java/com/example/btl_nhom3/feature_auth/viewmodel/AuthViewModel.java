@@ -13,7 +13,6 @@ import com.example.btl_nhom3.feature_auth.repository.AuthRepository;
 public class AuthViewModel extends AndroidViewModel {
 
 	private final AuthRepository repository;
-	private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
 	private final MutableLiveData<User> loginUser = new MutableLiveData<>();
 	private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
@@ -39,9 +38,7 @@ public class AuthViewModel extends AndroidViewModel {
 			return;
 		}
 
-		loading.setValue(true);
 		User user = repository.login(safeUsername, safePassword);
-		loading.setValue(false);
 
 		if (user == null) {
 			errorMessage.setValue("Sai tài khoản hoặc mật khẩu");

@@ -30,7 +30,6 @@
             android:padding="20dp"
             android:elevation="4dp">
 
-            <!-- Tên đăng nhập -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +48,6 @@
                 android:maxLines="1" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginBottom="12dp"/>
 
-            <!-- Mật khẩu -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +66,6 @@
                 android:maxLines="1" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginBottom="12dp"/>
 
-            <!-- Xác nhận mật khẩu -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +84,6 @@
                 android:maxLines="1" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginBottom="12dp"/>
 
-            <!-- Họ tên -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,7 +101,6 @@
                 android:textSize="14sp" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginBottom="12dp"/>
 
-            <!-- Số điện thoại -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,7 +118,6 @@
                 android:textSize="14sp" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginBottom="12dp"/>
 
-            <!-- Địa chỉ -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -150,13 +144,6 @@
                 android:visibility="gone" />
 
         </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/progressRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:visibility="gone" />
 
         <Button
             android:id="@+id/btnRegister"

@@ -26,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity {
 	private EditText edtPhone;
 	private EditText edtAddress;
 	private TextView txtError;
-	private ProgressBar progressRegister;
 
 	private RegisterViewModel viewModel;
 
@@ -42,7 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
 		edtPhone = findViewById(R.id.edtRegPhone);
 		edtAddress = findViewById(R.id.edtRegAddress);
 		txtError = findViewById(R.id.txtRegError);
-		progressRegister = findViewById(R.id.progressRegister);
 		Button btnRegister = findViewById(R.id.btnRegister);
 		TextView txtBackLogin = findViewById(R.id.txtBackLogin);
 
@@ -65,10 +63,6 @@ public class RegisterActivity extends AppCompatActivity {
 	}
 
 	private void observeViewModel() {
-		viewModel.getLoading().observe(this, isLoading -> {
-			boolean loading = isLoading != null && isLoading;
-			progressRegister.setVisibility(loading ? View.VISIBLE : View.GONE);
-		});
 
 		viewModel.getRegisterMessage().observe(this, message -> {
 			if (message == null || message.trim().isEmpty()) {

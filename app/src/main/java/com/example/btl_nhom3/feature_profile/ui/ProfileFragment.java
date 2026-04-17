@@ -106,23 +106,16 @@ public class ProfileFragment extends Fragment {
   }
 
   private void logout() {
-      // 1. Xóa sạch SharedPreferences để không bị lưu tên User cũ
-      // Lưu ý: Kiểm tra xem tên file "USER" có khớp với lúc bạn Login không nhé
-      SharedPreferences pref = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+
+      SharedPreferences pref = getActivity().getSharedPreferences("USER", Context.MODE_PRIVATE);
       SharedPreferences.Editor editor = pref.edit();
       editor.clear();
       editor.apply();
 
-      // 2. Chuyển hướng về màn hình Đăng nhập (LoginActivity)
       Intent intent = new Intent(getActivity(), LoginActivity.class);
 
-      // 3. QUAN TRỌNG: Xóa sạch các màn hình cũ trong bộ nhớ (Stack)
-      // Việc này giúp khi sang User mới, các Fragment sẽ được khởi tạo mới hoàn toàn
       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
       startActivity(intent);
-
-      // Đóng Activity hiện tại chứa Fragment này
       if (getActivity() != null) {
           getActivity().finish();
       }
