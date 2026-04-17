@@ -80,8 +80,6 @@ public class LoginActivity extends AppCompatActivity {
 	}
 
 	private void observeViewModel() {
-		viewModel.getLoading().observe(this, this::renderLoading);
-
 		viewModel.getErrorMessage().observe(this, message -> {
 			if (message == null || message.trim().isEmpty()) {
 				txtError.setVisibility(View.GONE);
@@ -100,10 +98,6 @@ public class LoginActivity extends AppCompatActivity {
 
 	}
 
-	private void renderLoading(Boolean isLoading) {
-		boolean loading = isLoading != null && isLoading;
-		progressLogin.setVisibility(loading ? View.VISIBLE : View.GONE);
-	}
 
 	private void saveSession(User user) {
 		getSharedPreferences(PREF_USER, Context.MODE_PRIVATE)
