@@ -17,17 +17,32 @@ import java.util.Locale;
 import java.util.Map;
 
 public class OrderRepository {
+    private static final String PREF_USER = "USER";
+    private static final String KEY_USER_ID = "user_id";
     private Database dbHelper;
+    private final Context appContext;
 
     public OrderRepository(Context context) {
-        dbHelper = new Database(context);
+        appContext = context.getApplicationContext();
+        dbHelper = new Database(appContext);
     }
 
     public long checkout(String username, int total, String address, String phone) {
+        int userId = appContext.getSharedPreferences(PREF_USER, Context.MODE_PRIVATE)
+                .getInt(KEY_USER_ID, 0);
+
+        // Read cart first, then process order in one DB transaction to avoid lock conflicts.
+        CartRepository cartRepo = CartRepository.getInstance();
+        List<CartItem> cartItems = cartRepo.getCart(appContext);
+        if (cartItems.isEmpty()) {
+            return -1;
+        }
+
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
+            values.put("user_id", userId);
             values.put("username", username);
             values.put("total_price", total);
             values.put("status", "Đang xử lý");
@@ -36,10 +51,9 @@ public class OrderRepository {
             values.put("created_at", new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(new Date()));
 
             long orderId = db.insert("orders", null, values);
-
-            // Chuyển dữ liệu từ cart sang order_items dựa trên user_id
-            CartRepository cartRepo = CartRepository.getInstance();
-            List<CartItem> cartItems = cartRepo.getCart();
+            if (orderId == -1) {
+                return -1;
+            }
 
             for (CartItem item : cartItems) {
                 ContentValues itemValues = new ContentValues();
@@ -51,8 +65,8 @@ public class OrderRepository {
                 db.insert("order_items", null, itemValues);
             }
 
-            // xoá giỏ sau khi đặt
-            cartRepo.clearCart();
+            // Clear cart with the same transaction/connection.
+            db.delete("cart", "user_id = ?", new String[]{String.valueOf(userId)});
 
             db.setTransactionSuccessful();
             return orderId;
