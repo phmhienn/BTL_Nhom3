@@ -36,7 +36,7 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_cart, container, false);
+        return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
     @Override
@@ -54,27 +54,27 @@ public class CartFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(CartViewModel.class);
         observeViewModel();
-        viewModel.loadCart();
+        viewModel.loadCart(requireContext());
 
         adapter.setOnCartItemActionListener(new CartAdapter.OnCartItemActionListener() {
             @Override
             public void onIncrease(CartItem item) {
-                viewModel.increaseQuantity(item);
+                viewModel.increaseQuantity(requireContext(), item);
             }
 
             @Override
             public void onDecrease(CartItem item) {
-                viewModel.decreaseQuantity(item);
+                viewModel.decreaseQuantity(requireContext(), item);
             }
 
             @Override
             public void onRemove(CartItem item) {
-                viewModel.removeItem(item);
+                viewModel.removeItem(requireContext(), item);
             }
 
             @Override
             public void onSetQuantity(CartItem item, int quantity) {
-                viewModel.setQuantity(item, quantity);
+                viewModel.setQuantity(requireContext(), item, quantity);
             }
         });
 

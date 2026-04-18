@@ -48,6 +48,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), FoodDetailActivity.class);
 
+                intent.putExtra("id", food.getId());
                 intent.putExtra("name", food.getName());
                 intent.putExtra("price", food.getPrice());
                 intent.putExtra("image", food.getImage());
@@ -58,7 +59,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         });
 
         holder.btnAddToCart.setOnClickListener(v -> {
-            CartRepository.getInstance().addItem(food.getId(), food.getName(), food.getPrice());
+            CartRepository.getInstance().addItem(v.getContext(), food.getId(), food.getName(), food.getPrice());
             Toast.makeText(v.getContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
         });
     }

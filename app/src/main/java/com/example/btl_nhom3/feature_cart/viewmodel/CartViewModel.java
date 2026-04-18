@@ -1,5 +1,7 @@
 package com.example.btl_nhom3.feature_cart.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -29,34 +31,34 @@ public class CartViewModel extends ViewModel {
 		return canCheckout;
 	}
 
-	public void loadCart() {
-		refreshState();
+	public void loadCart(Context context) {
+		refreshState(context);
 	}
 
-	public void increaseQuantity(CartItem item) {
-		repository.updateQuantity(item.getId(), item.getQuantity() + 1);
-		refreshState();
+	public void increaseQuantity(Context context, CartItem item) {
+		repository.updateQuantity(context, item.getId(), item.getQuantity() + 1);
+		refreshState(context);
 	}
 
-	public void decreaseQuantity(CartItem item) {
-		repository.updateQuantity(item.getId(), item.getQuantity() - 1);
-		refreshState();
+	public void decreaseQuantity(Context context, CartItem item) {
+		repository.updateQuantity(context, item.getId(), item.getQuantity() - 1);
+		refreshState(context);
 	}
 
-	public void removeItem(CartItem item) {
-		repository.removeItem(item.getId());
-		refreshState();
+	public void removeItem(Context context, CartItem item) {
+		repository.removeItem(context, item.getId());
+		refreshState(context);
 	}
 
-	public void setQuantity(CartItem item, int quantity) {
-		repository.updateQuantity(item.getId(), quantity);
-		refreshState();
+	public void setQuantity(Context context, CartItem item, int quantity) {
+		repository.updateQuantity(context, item.getId(), quantity);
+		refreshState(context);
 	}
 
-	private void refreshState() {
-		List<CartItem> items = repository.getCart();
-		cartItems.setValue(items);
-		total.setValue(repository.calculateTotal());
+	private void refreshState(Context context) {
+		List<CartItem> items = repository.getCart(context);
+			cartItems.setValue(items);
+		total.setValue(repository.calculateTotal(context));
 		canCheckout.setValue(!items.isEmpty());
 	}
 }

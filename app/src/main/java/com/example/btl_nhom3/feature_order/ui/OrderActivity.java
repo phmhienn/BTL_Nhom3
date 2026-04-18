@@ -9,10 +9,12 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.btl_nhom3.R;
-import com.example.btl_nhom3.feature_cart.repository.CartRepository;
 import com.example.btl_nhom3.feature_order.repository.OrderRepository;
 
 public class OrderActivity extends AppCompatActivity {
+    private static final String PREF_USER = "USER";
+    private static final String KEY_USERNAME = "username";
+
     EditText edtAddress, edtPhone;
     Button btnConfirm;
     TextView tvTotal;
@@ -41,15 +43,15 @@ public class OrderActivity extends AppCompatActivity {
             String addr = edtAddress.getText().toString();
             String phone = edtPhone.getText().toString();
 
-            // Lấy username từ SharedPreferences (Bạn cần lưu lúc đăng nhập)
-            String user = getSharedPreferences("UserFile", MODE_PRIVATE).getString("username", "user");
+            String user = getSharedPreferences(PREF_USER, MODE_PRIVATE).getString(KEY_USERNAME, "user");
 
             if (!addr.isEmpty() && !phone.isEmpty()) {
                 long id = repository.checkout(user, total, addr, phone);
                 if (id != -1) {
-                    CartRepository.getInstance().clearCart();
                     Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_LONG).show();
                     finish();
+                } else {
+                    Toast.makeText(this, "Giỏ hàng trống hoặc đặt hàng thất bại", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();

@@ -48,7 +48,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> finish());
 
         btnAddToCart.setOnClickListener(v -> {
-            CartRepository.getInstance().addItem(id, name, price);
+            CartRepository.getInstance().addItem(this, id, name, price);
             Toast.makeText(this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
         });
     }
